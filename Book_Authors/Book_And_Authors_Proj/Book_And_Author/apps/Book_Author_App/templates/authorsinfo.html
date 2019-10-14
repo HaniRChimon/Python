@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Authors info</title>
+</head>
+
+<body>
+    <h1 style="color:red;">Authors Info</h1>
+    <hr>
+    <a style="color: orange;" href="/viewauthors">Go Back</a>
+    <h1>Authors Info</h1>
+    <hr>
+    <h1><label style="color: red;"> Author # : </label>{{author.id}}</h1>
+    <h2><label style="color: red;"> Author's First Name : </label>{{author.first_name}}</h2>
+    <h3><label style="color: red;"> Author's Last Name : </label>{{author.last_name}}</h3>
+    <h3><label style="color: red;"> Author's Notes : </label>{{author.notes}}</h3>
+    <h3><label style="color: red;"> Author's Book : </label> {% for book in author.books.all %}
+        <p> {{book.title}}</p>
+        {% endfor %}</h3>
+
+
+    <hr>
+    <div>
+        <label style="color: black;">Add Book To this Author</label>
+        <br><br>
+        <form action="/addbook/{{author.id}}" method="POST">
+            {% csrf_token %}
+            <select name="bookid">
+                {% for book in all_books %}
+                <option value="{{book.id}}">{{book.title}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Add Book">
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Author Info</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <h1 style="color: red;">Authors Info</h1>
+    <a style="color: orange;" href="/">Home</a>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Author #</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for author in all_authors %}
+            <tr>
+                <th scope="row">{{author.id}}</th>
+                <td>{{author.first_name}}</td>
+                <td>{{author.last_name}}</td>
+                <td>{{author.notes}}</td>
+                <td><a href="/author_info/{{author.id}}">View</a> | <a style="color: red;" href="author/{{author.id}}/remove">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+
+</html>

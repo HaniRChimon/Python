@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Book and Author</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<style>
+  .Book {
+    height: 100px;
+    width: 250px;
+    padding: 20px;
+  }
+
+  h1 {
+    padding: 20px;
+  }
+
+  .bookbox {
+    border: 2px solid blue;
+    width: 300px;
+    height: 300px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding: 15px;
+    margin: 20px;
+    display: inline-block;
+
+  }
+
+  #bbutton {
+    width: 100px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    margin-top: 20px;
+
+  }
+
+  #bbutton {
+    width: 100px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    margin-top: 20px;
+    
+  }
+
+  #bbutton1 {
+    width: 100px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    
+
+  }
+
+  .Author {
+    height: 100px;
+    width: 250px;
+    padding: 20px;
+  }
+
+  .authorbox {
+    border: 2px solid red;
+    width: 300px;
+    height: 450px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding: 5px;
+    margin-left: 20px;
+    display: inline-block;
+  }
+
+  .Note {
+    height: 100px;
+    width: 250px;
+    padding: 20px;
+
+  }
+</style>
+
+<body> 
+  <h1><span style="color: blue;">Add A Book</span> Or <span style="color:red;">Add Author</span></h1>
+  </div>
+  <div class="bookbox">
+    <form action="newbook" method="POST">
+      {% csrf_token %}
+      <div class="Author">
+        <label for="exampleInputEmail1">Title</label>
+        <input name="title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Title of the book">
+      </div>
+      <div class="Book">
+        <label for="exampleInputPassword1">Description</label>
+        <input name="desc" type="text" class="form-control" id="exampleInputPassword1"
+          placeholder="Description of the book">
+      </div>
+      <button id="bbutton" style="margin-left: 80px;" type="submit" class="btn btn-primary">Add</button>
+    </form>
+  </div>
+  <div class="authorbox">
+    <a style="margin-left: 100px; color: red;" href="/viewauthors"> View Authors </a>   
+    <form action="newauthor" method="POST">
+      {% csrf_token %}
+      <div class="Author">
+        <label for="exampleInputEmail1"> Author First Name</label>
+        <input name="first_name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="First Name of the Author">
+      </div>
+      <div class="Author">
+        <label for="exampleInputPassword1"> Author Last Name</label>
+        <input name="last_name" type="text" class="form-control" id="exampleInputPassword1"
+          placeholder="Last Name of the Author">
+      </div>
+      <div class="Note">
+        <label for="exampleInputPassword1">Notes</label>
+        <input name="note" type="text" class="form-control" id="exampleInputPassword1" placeholder="Notes">
+      </div>
+      <button id="bbutton" style="margin-left: 80px;" type="submit" class="btn btn-primary">Add</button>
+      
+    </form>
+  </div>
+
+  <br>
+  <hr>
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Book #</th>
+        <th scope="col">Title</th>
+        <th scope="col">Desc</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in all_books %}
+      <tr>
+        <th scope="row">{{book.id}}</th>
+        <td>{{book.title}}</td>
+        <td>{{book.desc}}</td>
+        <td><a href="/book_info/{{book.id}}">View</a> | <a style="color: red;" href="book/{{book.id}}/remove">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</body>
+
+</html>
